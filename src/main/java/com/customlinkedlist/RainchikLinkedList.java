@@ -2,6 +2,10 @@ package com.customlinkedlist;
 
 public class RainchikLinkedList {
 
+    public RainchikLinkedList(Object... objects){
+
+    } //можно было бы использовать ломбок, но для java core наверно рано
+
     public int size(){
         return 0;
     }
@@ -26,8 +30,8 @@ public class RainchikLinkedList {
         return null;
     }
 
-    public void get(int index){
-
+    public Object get(int index){
+        return null;
     }
 
     public void removeFirst(){
