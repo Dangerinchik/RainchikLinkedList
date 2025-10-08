@@ -1,8 +1,9 @@
 package com.customlinkedlist;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RainchikLinkedList<E> {
+public class RainchikLinkedList<E> implements Iterable<E> {
     private int size = 0;
     private final Entry<E> header = new Entry<>(null, null, null);
     public RainchikLinkedList() {
@@ -14,6 +15,24 @@ public class RainchikLinkedList<E> {
         for(E e : elements){
             this.addLast(e);
         }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private Entry<E> current = header.next;
+            @Override
+            public boolean hasNext() {
+                return current != header;
+            }
+
+            @Override
+            public E next() {
+                E element = current.element;
+                current = current.next;
+                return element;
+            }
+        };
     }
 
     private static class Entry<E>

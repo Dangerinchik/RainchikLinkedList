@@ -230,4 +230,15 @@ public class RainchikLinkedListTest {
         RainchikLinkedList list = new RainchikLinkedList();
         Assertions.assertThrows(NoSuchElementException.class, () -> list.remove(0));
     }
+
+    @Test
+    public void its_Iterable(){
+        RainchikLinkedList<Integer> list = new RainchikLinkedList<>(123, 2435, 25, 968, 43);
+        int actualSum = 0;
+        int expectedSum = 123+2435+25+968+43;
+        for(Integer e : list){
+            actualSum+=e;
+        }
+        Assertions.assertEquals(expectedSum, actualSum);
+    }
 }
