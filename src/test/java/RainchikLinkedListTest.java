@@ -192,7 +192,7 @@ public class RainchikLinkedListTest {
         int actualSize = list.size();
         int expectedSize = actualSize - 1;
         list.removeLast();
-        Object actualElement = list.getFirst();
+        Object actualElement = list.getLast();
         Object expectedElement = 777;
         Assertions.assertEquals(expectedElement, actualElement);
         actualSize = list.size();
