@@ -2,18 +2,19 @@ package com.customlinkedlist;
 
 import java.util.NoSuchElementException;
 
-public class RainchikLinkedList {
+public class RainchikLinkedList<E> {
     private int size = 0;
-    private Entry header = new Entry(null, null, null);
+    private final Entry<E> header = new Entry<>(null, null, null);
     public RainchikLinkedList() {
         header.prev = header.next = header;
     }
-    public RainchikLinkedList(Object... objects){
+    @SafeVarargs
+    public RainchikLinkedList(E... elements){
         header.prev = header.next = header;
-        for(int i = 0; i<objects.length; i++){
-            this.addLast(objects[i]);
+        for(E e : elements){
+            this.addLast(e);
         }
-    } //можно было бы использовать ломбок, но для java core наверно рано
+    }
 
     private static class Entry<E>
     {
@@ -28,12 +29,12 @@ public class RainchikLinkedList {
        }
     }
 
-    private Entry entry(int index) {
+    private Entry<E> entry(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
 
-        Entry e = header;
+        Entry<E> e = header;
 
         if(index < (size >> 1)) {
             for(int i = 0; i<=index; i++){
@@ -53,21 +54,21 @@ public class RainchikLinkedList {
         return size;
     }
 
-    public void addFirst(Object el){
-        Entry newEntry = new Entry(el, header.next, header);
+    public void addFirst(E el){
+        Entry<E> newEntry = new Entry<>(el, header.next, header);
         newEntry.next.prev = newEntry;
         newEntry.prev.next = newEntry;
         size++;
     }
 
-    public void addLast(Object el){
-        Entry newEntry = new Entry(el, header, header.prev);
+    public void addLast(E el){
+        Entry<E> newEntry = new Entry<>(el, header, header.prev);
         newEntry.prev.next = newEntry;
         newEntry.next.prev = newEntry;
         size++;
     }
 
-    public void add(int index, Object el){
+    public void add(int index, E el){
         if(index == size){
             addLast(el);
             return;
@@ -77,30 +78,30 @@ public class RainchikLinkedList {
             return;
         }
         else {
-            Entry currentEntry = entry(index);
-            Entry newEntry = new Entry(el, currentEntry, currentEntry.prev);
+            Entry<E> currentEntry = entry(index);
+            Entry<E> newEntry = new Entry<>(el, currentEntry, currentEntry.prev);
             newEntry.next.prev = newEntry;
             newEntry.prev.next = newEntry;
             size++;
         }
     }
 
-    public Object getFirst(){
+    public E getFirst(){
         if(size == 0){
             throw new NoSuchElementException("List is Empty");
         }
         return header.next.element;
     }
 
-    public Object getLast(){
+    public E getLast(){
         if(size == 0){
             throw new NoSuchElementException("List is Empty");
         }
         return header.prev.element;
     }
 
-    public Object get(int index){
-        if(size == 0){
+    public E get(int index){
+        if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException("List is Empty");
         }
         return entry(index).element;
@@ -111,7 +112,7 @@ public class RainchikLinkedList {
             throw new NoSuchElementException("List is Empty");
         }
 
-        Entry first = header.next;
+        Entry<E> first = header.next;
         header.next = first.next;
         first.next.prev = header;
 
@@ -127,7 +128,7 @@ public class RainchikLinkedList {
             throw new NoSuchElementException("List is Empty");
         }
 
-        Entry last = header.prev;
+        Entry<E> last = header.prev;
         header.prev = last.prev;
         last.prev.next = header;
 
@@ -149,7 +150,7 @@ public class RainchikLinkedList {
             removeLast();
         }
         else{
-            Entry currentEntry = entry(index);
+            Entry<E> currentEntry = entry(index);
             currentEntry.prev.next = currentEntry.next;
             currentEntry.next.prev = currentEntry.prev;
 
