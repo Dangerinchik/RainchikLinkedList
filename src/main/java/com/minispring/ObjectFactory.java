@@ -1,5 +1,6 @@
 package com.minispring;
 
+import lombok.Setter;
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
@@ -14,30 +15,25 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toMap;
 
 public class ObjectFactory {
-    private static ObjectFactory ourInstance = new ObjectFactory();
-    private Config config;
+
+    private final ApplicationContext context;
+
     private List<ObjectConfigurator> configurators = new ArrayList<>();
 
-    public static ObjectFactory getInstance() { return ourInstance; }
-
     @SneakyThrows
-    public ObjectFactory() {
-
-        config = new JavaConfig("com.minispring", new HashMap<>(Map.of(Hunter.class, AncientHunter.class)));
-        for (Class<? extends ObjectConfigurator> aClass : config.getScanner().getSubTypesOf(ObjectConfigurator.class)) {
+    public ObjectFactory(ApplicationContext context) {
+        this.context = context;
+        for (Class<? extends ObjectConfigurator> aClass : context.getConfig().getScanner().getSubTypesOf(ObjectConfigurator.class)) {
             configurators.add(aClass.getDeclaredConstructor().newInstance());
         }
     }
 
     @SneakyThrows
-    public <T> T createObject(Class<T> type) {
-        Class<? extends T> implClass = type;
-        if(type.isInterface()){
-            implClass = config.getImplClass(type);
-        }
+    public <T> T createObject(Class<T> implClass) {
+
         T t = implClass.getDeclaredConstructor().newInstance();
 
-        configurators.forEach(configurator -> configurator.configure(t));
+        configurators.forEach(configurator -> configurator.configure(t, context));
 
         return t;
 

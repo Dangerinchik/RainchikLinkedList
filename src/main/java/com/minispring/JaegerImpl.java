@@ -1,8 +1,8 @@
 package com.minispring;
 
 public class JaegerImpl implements Jaeger {
-
-    private Alcohol alcohol = ObjectFactory.getInstance().createObject(Alcohol.class);
+    @InjectByType
+    private Alcohol alcohol;
 
     @Override
     public void manageHunt() {

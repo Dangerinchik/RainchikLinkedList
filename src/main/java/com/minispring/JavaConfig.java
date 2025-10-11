@@ -22,7 +22,7 @@ public class JavaConfig implements Config {
     public <T> Class<? extends T> getImplClass(Class<T> ifc) {
         return ifc2ImplClass.computeIfAbsent(ifc, aClass ->{
             Set<Class<? extends T>> classes = scanner.getSubTypesOf(ifc);
-            if(classes.size() == 1) {
+            if(classes.size() >= 1) {
                 return classes.iterator().next();
             }
 
