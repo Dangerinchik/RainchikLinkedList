@@ -11,14 +11,14 @@ public class Simulation {
     private final RobotFactory factory = new RobotFactory();
     private final Faction world = new Faction("World");
     private final Faction wednesday = new Faction("Wednesday");
-    private final int days = 100;
+    private final int DAYS = 100;
 
     public void start() {
 
         Phaser phaser = new Phaser(3);
 
         Thread factoryThread = new Thread(() -> {
-            for (int day = 1; day <= days; day++) {
+            for (int day = 1; day <= DAYS; day++) {
                 try {
 
                     int produced = factory.fulfillDayQuote();
@@ -55,7 +55,7 @@ public class Simulation {
     }
 
     private void runFaction(Faction faction, Phaser phaser) {
-        for (int day = 1; day <= days; day++) {
+        for (int day = 1; day <= DAYS; day++) {
             try {
                 phaser.arriveAndAwaitAdvance();
 
