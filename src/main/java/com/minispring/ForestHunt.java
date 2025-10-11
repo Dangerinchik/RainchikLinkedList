@@ -2,9 +2,9 @@ package com.minispring;
 
 public class ForestHunt implements Hunt {
 
-    Hunter hunter = new ArmoredHunter();
-    Hunter hunter2 = new AncientHunter();
-    Jaeger jaeger = new JaegerImpl();
+    Hunter hunter = ObjectFactory.getInstance().createObject(Hunter.class);
+    Hunter hunter2 = ObjectFactory.getInstance().createObject(Hunter.class);
+    Jaeger jaeger = ObjectFactory.getInstance().createObject(JaegerImpl.class);
     public void produceHunt() {
         startHunt();
         jaeger.manageHunt();
