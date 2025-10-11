@@ -1,4 +1,5 @@
-import com.customlinkedlist.RainchikLinkedList;
+package com.customlinkedlist;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

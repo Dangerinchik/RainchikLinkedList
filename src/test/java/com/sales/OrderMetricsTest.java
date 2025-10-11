@@ -1,4 +1,5 @@
-import com.sales.*;
+package com.sales;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
