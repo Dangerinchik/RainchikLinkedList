@@ -1,4 +1,4 @@
-package com.minispring;
+package com.minispring.dependencyInjection;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

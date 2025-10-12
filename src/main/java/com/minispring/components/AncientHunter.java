@@ -1,5 +1,8 @@
-package com.minispring;
+package com.minispring.components;
 
+import com.minispring.dependencyInjection.Component;
+
+@Component
 public class AncientHunter implements Hunter {
     @Override
     public void hunt() {

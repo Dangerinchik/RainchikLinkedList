@@ -1,11 +1,9 @@
-package com.minispring;
+package com.minispring.dependencyInjection;
 
 import lombok.Getter;
 import org.reflections.Reflections;
 
-import java.security.SecureRandom;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 public class JavaConfig implements Config {

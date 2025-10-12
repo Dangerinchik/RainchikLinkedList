@@ -1,11 +1,15 @@
-package com.minispring;
+package com.minispring.components;
 
+import com.minispring.dependencyInjection.Autowired;
+import com.minispring.dependencyInjection.Component;
+
+@Component
 public class ForestHunt implements Hunt {
-    @InjectByType
+    @Autowired
     Hunter hunter;
-    @InjectByType
+    @Autowired
     Hunter hunter2;
-    @InjectByType
+    @Autowired
     Jaeger jaeger;
     public void produceHunt() {
         startHunt();

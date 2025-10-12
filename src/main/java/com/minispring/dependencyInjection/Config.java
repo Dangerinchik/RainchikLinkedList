@@ -1,4 +1,4 @@
-package com.minispring;
+package com.minispring.dependencyInjection;
 
 import org.reflections.Reflections;
 

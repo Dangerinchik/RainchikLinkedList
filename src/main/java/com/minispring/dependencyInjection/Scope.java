@@ -1,8 +1,11 @@
-package com.minispring;
+package com.minispring.dependencyInjection;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Singleton {
+public @interface Scope {
+    BeanScope value() default BeanScope.SINGLETON;
+
 }
+
